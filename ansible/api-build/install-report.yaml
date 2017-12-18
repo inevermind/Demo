@@ -1,0 +1,17 @@
+---
+- set_fact:
+    msg: |
+      Project successfully built
+      Installed build number: {{ installed_build_number }}
+      Installed build version: {{ installed_build_version }}
+      Added build number: {{ build_number }}
+      Added build version: {{ api_version }}
+      Build path: {{ api_working_directory }}
+- debug:
+    msg: "{{ msg.split('\n') }}"
+- debug:
+    msg: "Apply command: ansible-playbook -i inventory/{{ environment_mode }} {{ apply_playbook }}  --extra-vars 'build_number={{ build_number }}'"
+  when: build_tag is not defined
+- debug:
+    msg: "Apply command: ansible-playbook -i inventory/{{ environment_mode }} {{ apply_playbook }} --extra-vars 'build_number={{ build_number }} build_tag={{ build_tag }}'"
+  when: build_tag is defined

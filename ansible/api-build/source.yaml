@@ -1,0 +1,10 @@
+---
+- include_role: name=api-handle-build-tag
+- include_role: name=api-gen-build-number
+- include_role: name=api-set-work-dir-as-ansible
+- include_role: name=api-repo
+- include_role: name=api-composer
+- include_role: name=api-cache-clear
+- include_role: name=api-assets
+- include_role: name=api-maildaemon-templates
+  when: api_install_email_service|bool == true

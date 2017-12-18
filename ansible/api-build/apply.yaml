@@ -1,0 +1,36 @@
+---
+- include_role: name=api-logrotate
+- include_role: name=api-handle-build-tag
+- include_role: name=api-set-work-dir-as-build
+- include_role: name=api-map-clear
+- include_role:
+    name: nginx-api
+  tags: reconfig-nginx
+  when: api_install_ppm|bool == true
+- include_role: name=nginx-restart
+  when: api_install_ppm|bool == true
+- include_role: name=api-supervisor-journal-queue-api-request-handler
+  when: api_install_journal_service|bool == true
+- include_role: name=telephony-background
+  when: api_install_telephony_service|bool == true
+- include_role: name=api-supervisor-telephony
+  when: api_install_telephony_service|bool == true
+- include_role: name=api-supervisor-email-daemon
+  when: api_install_email_service|bool == true
+- include_role: name=api-supervisor-command
+  when: api_install_command_service|bool == true
+- include_role: name=api-supervisor-email-processor
+  when: api_install_email_processor_service|bool == true
+- include_role: name=api-supervisor-payment-gateway-connection-request
+  when: api_install_payment_gateway_connection_request_service|bool == true
+
+- include_role: name=api-supervisor-payment-gateway-connection-request
+  when: api_install_payment_gateway_connection_request_service|bool == true
+
+
+- include_role: name=api-set-scheme
+- include_role: name=api-set-host-as-api
+- include_role: name=api-set-route-list
+- include_role: name=api-ping-installed-build
+- include_role: name=api-installed-build-info
+  when: api_test_ping|bool == true

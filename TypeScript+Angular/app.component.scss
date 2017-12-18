@@ -1,0 +1,72 @@
+@import "../static/style/global";
+
+/** START LAYOUT CLASSES **/
+.content-layer {
+  min-width: $global-min-content-width;
+  min-height: $global-min-content-height;
+  max-height: 100vh;
+  height: 100vh;
+  background-color: $global-background-color;
+}
+
+.left-column-layer {
+  border-right: solid $global-border-size $global-border-color;
+  min-width: $left-column-min-width !important;
+
+}
+
+.right-column-layer {
+
+}
+
+.header-toolbar {
+  height: $header-toolbar-height !important;
+  min-height: $header-toolbar-height !important;
+  max-height: $header-toolbar-height !important;
+}
+
+.header-toolbar md-icon {
+  @extend .half-tab-padding-right;
+}
+
+.header-toolbar md-toolbar-row {
+  height: $header-toolbar-height !important;
+}
+
+.header-toolbar .return-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.start-side-nav-layer {
+  width: 200px;
+}
+
+.avatar {
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.program-menu md-icon {
+  @extend .tab-margin-right;
+}
+
+.program-menu mat-list-item {
+  @extend .tab-padding-left;
+}
+
+.program-menu {
+  @extend .tab-margin-top;
+}
+
+/** END LAYOUT CLASSES **/
+
+/** START SIDENAV CLASSES **/
+
+.profile-card {
+  @extend .text;
+}
+
+/** END SIDENAV CLASSES **/

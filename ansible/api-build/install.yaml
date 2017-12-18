@@ -1,0 +1,33 @@
+---
+- include_role: name=api-gather-localhost-fact
+- include_role: name=api-sync
+- include_role: name=api-set-work-dir-as-build
+- include_role: name=api-maildaemon-templates-sync
+  when: api_install_email_service|bool == true
+- include_role: name=api-clear-perm
+- include_role: name=api-cache-clear
+- include_role: name=api-set-perm
+- include_role: name=api-map-list
+- include_role: name=api-php-pm-configure
+  when: api_install_ppm|bool == true
+- include_role: name=api-supervisor-php-pm
+  when: api_install_ppm|bool == true
+- include_role:
+    name: api-map-list
+  vars:
+    include_current_build: true
+- include_role:
+    name: nginx-api-map-list
+  tags: reconfig-nginx
+  when: api_install_ppm|bool == true
+- include_role: name=nginx-restart
+  when: api_install_ppm|bool == true
+- include_role: name=api-set-scheme
+- include_role: name=api-set-host-as-api
+- include_role: name=api-set-route-list
+- include_role: name=api-ping-installed-build
+  when: api_test_ping|bool == true
+- include_role: name=api-ping-added-build
+  when: api_test_ping|bool == true
+- include_role: name=api-installed-build-info
+  when: api_gather_installed_build_info|bool == true

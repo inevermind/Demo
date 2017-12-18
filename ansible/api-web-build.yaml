@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+    - include: playbook_include/api-build/source.yaml
+
+- hosts: apiservers
+  vars:
+    api_install_ppm: true
+    api_test_ping: true
+    api_gather_installed_build_info: true
+    apply_playbook: api-web-build-apply.yaml
+  tasks:
+    - include: playbook_include/api-build/install.yaml
+    - include: playbook_include/api-build/install-report.yaml

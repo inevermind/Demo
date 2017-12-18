@@ -1,0 +1,16 @@
+- name: Read map available build list
+  shell: cd {{ api_root }} && for d in `ls -1tr` ; do (cd "$d" && { basename  "$PWD" && [ -f ./ppm.json ] && grep port ./ppm.json | cut -d ':' -f 2 | sed -e 's/[ ,]//g' || echo "not_found" ; } | tr "\r\n" ";" && echo); done
+  register: api_map_available_build_list_ls_result
+
+- debug: var=api_map_available_build_list_ls_result verbosity=2
+
+- name: Generate map available build list
+  set_fact:
+    api_map_available_build_list: []
+- set_fact:
+    api_map_available_build_list : "{{ api_map_available_build_list }} + {{ [{'build_number': (item.split(';')[0]), 'ppm_port': (item.split(';')[1]) }] }}"
+  when: api_install_ppm|bool == true
+  with_items: "{{ api_map_available_build_list_ls_result.stdout_lines }}"
+  become: yes
+
+- debug: var=api_map_available_build_list

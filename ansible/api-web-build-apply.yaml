@@ -1,0 +1,10 @@
+---
+- hosts: apiservers
+  vars:
+    api_install_journal_service: true
+    api_install_ppm: true
+    api_test_ping: true
+    api_gather_installed_build_info: true
+  tasks:
+    - include: playbook_include/api-build/apply.yaml
+    - include: playbook_include/api-build/apply-report.yaml

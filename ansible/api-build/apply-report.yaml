@@ -1,0 +1,9 @@
+---
+- set_fact:
+    msg: |
+      Build successfully installed
+      Installed build number: {{ installed_build_number }}
+      Installed build version: {{ installed_build_version }}
+      Build path: {{ api_working_directory }}
+- debug:
+    msg: "{{ msg.split('\n') }}"
